@@ -13,12 +13,13 @@ int main()
 
     if (Valor_produto < Valor_inserido){
         troco = Valor_inserido - Valor_produto;
-        if (troco > 500){
-            quin = troco % 500;
-            troco /= 500; 
-        } else if (troco > 100){
-            cem = troco % 100;
-            troco /= 100;
+        if (troco >= 500){
+            quin = troco / 500;
+            troco %= 500; 
+        }
+        else if (troco >= 100){
+            cem = troco / 100;
+            troco %= 100;
         }else if (troco > 50){
             cin = troco % 50;
             troco /= 50;
