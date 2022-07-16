@@ -1,28 +1,30 @@
 #include <stdio.h>
 
 int main (){
-    unsigned long long int inteiroGrande;
-    int inteiroMenor, CPF2, digit;
+    unsigned long long int inteiroGrande, inteiroMenor;
+    int CPF, CPF2, digit;
     int cont = 100000000, cont2 = 1000000000, 
     diminui = 10, diminui2 = 11, 
     verifica = 0, verifica2 = 0;
 
     scanf ("%llu", &inteiroGrande ); // suponha 12345678909
     inteiroMenor = inteiroGrande/100;
+    printf("%09llu\n", inteiroMenor);
     
-    CPF2 = inteiroMenor;
+    CPF, CPF = inteiroMenor;
+    /* CPF2 = CPF; */
 
     while (cont > 0){
-        digit = inteiroMenor / cont;
+        digit = CPF / cont;
         verifica = verifica + (digit * diminui);
         digit *= cont;
-        inteiroMenor -= digit;
+        CPF -= digit;
         cont /= 10;
         diminui--;
     }
     verifica = (verifica*10)%11;
     if (verifica == 10)
-        verifica = 00;
+        verifica = 0;
     
     long long lCPF2 = ((long long)(CPF2))*10;
 
@@ -34,7 +36,7 @@ int main (){
     while (cont2 > 0){
 
         ldigit = lCPF2 / cont2;
-        lverifica2 = lverifica2 + (ldigit * diminui2);
+        lverifica2 = lverifica2 + (ldigit*diminui2);
         ldigit *= cont2;
         lCPF2 -= ldigit;
         cont2 /= 10;
@@ -47,8 +49,14 @@ int main (){
 
     verifica *= 10; 
     verifica2 += verifica;
+    inteiroMenor = (inteiroMenor*100)+verifica2;
 
+    if (inteiroGrande == inteiroMenor){
+        printf("valido");
+    } else{
+        printf("invalido\n");
+    }
 
-    printf ("%llu\n" ,inteiroGrande); // vai imp rimi r 12345678909
-    printf("%d\n", inteiroMenor); // vai imp rimi r 123456789
+    printf ("%011llu\n", inteiroGrande); // vai imp rimi r 12345678909
+    printf ("%011llu\n", inteiroMenor); // vai imp rimi r 123456789
 }
